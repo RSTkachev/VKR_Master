@@ -1,0 +1,18 @@
+python -m vkr.finetune_listwise \
+    --split-name abo_v4 \
+    --siglip-model-id google/siglip2-so400m-patch14-384 \
+    --siglip-lora ./checkpoints/abo_v4_sigmoid_lora_r8_siglip2_heavy \
+    --vlm-model-id Qwen/Qwen3.5-4B \
+    --top-k 10 \
+    --epochs 10 --patience 3 --min-delta 0.005 \
+    --learning-rate 6e-5 \
+    --weight-decay 0.05 \
+    --lora-rank 32 --lora-alpha 64 \
+    --lora-dropout 0.1 \
+    --train-batch-size 1 \
+    --grad-accum-steps 16 \
+    --max-eval-examples 1000 \
+    --output-dir ./checkpoints/qwen_listwise_lora_v3 \
+    --regenerate-pairs \
+    --seed 42 --device cuda \
+    --run-name qwen_listwise_v3_lr6e-5_rank32_reg
